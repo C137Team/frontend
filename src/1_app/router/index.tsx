@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { LoginPage, RegisterPage } from "../../2_pages"
+import { LoginPage, RegisterPage, NotFoundPage } from "../../2_pages"
 
 export const Router = () => {
     return (
@@ -16,6 +16,8 @@ export const Router = () => {
             <Route path="app">
                 // routes
             </Route>
+
+            <Route path="*" element={ <NotFoundPage /> } />
         </Route>
         </Routes>
         </BrowserRouter>

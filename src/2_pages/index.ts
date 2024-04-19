@@ -1,6 +1,7 @@
 // Pages
-import { LoginPage } from "./lib/auth/login";
-import { RegisterPage } from "./lib/auth/register";
+import { LoginPage } from "./lib/LoginPage";
+import { RegisterPage } from "./lib/RegisterPage";
+import { NotFoundPage } from "./lib/NotFoundPage";
 
 
-export { LoginPage, RegisterPage }
+export { LoginPage, RegisterPage, NotFoundPage }
