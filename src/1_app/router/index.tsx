@@ -1,5 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { LoginPage, RegisterPage, NotFoundPage } from "../../2_pages"
+import { BottomNavBarWidget } from "../../3_widgets"
+
+import {
+    LoginPage,
+    RegisterPage,
+    NotFoundPage,
+    HomePage,
+    CoffeePage,
+    AccountPage
+} from "../../2_pages"
+
 
 export const Router = () => {
     return (
@@ -13,10 +23,13 @@ export const Router = () => {
             </Route>
 
             // main app
-            <Route path="app">
-                // routes
+            <Route path="app" element={ <BottomNavBarWidget /> }>
+                <Route path="home" element={ <HomePage /> } />
+                <Route path="coffee" element={ <CoffeePage /> } />
+                <Route path="account" element={ <AccountPage /> } />
             </Route>
 
+            // service
             <Route path="*" element={ <NotFoundPage /> } />
         </Route>
         </Routes>
