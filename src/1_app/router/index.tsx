@@ -7,7 +7,8 @@ import {
     NotFoundPage,
     HomePage,
     CoffeePage,
-    AccountPage
+    AccountPage,
+    EmailConfirmPage
 } from "../../2_pages"
 
 
@@ -20,6 +21,7 @@ export const Router = () => {
             <Route path="auth">
                 <Route index path="login" element={ <LoginPage /> } />
                 <Route path="register" element={ <RegisterPage /> } />
+                <Route path="emailConfirm" element={ <EmailConfirmPage /> } />
             </Route>
 
             // main app

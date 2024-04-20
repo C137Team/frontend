@@ -1,7 +1,8 @@
 import { Box, Button, Flex, FormControl, Input, Text, VStack } from "@chakra-ui/react"
 import { useState, FC } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import API from "../../../4_shared"
+import oggettoLogo from "../../../4_shared/lib/assets/img/oggetto/oggetto-logo_tonal-inverse-hor-rus.png"
 
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>
@@ -14,12 +15,15 @@ interface IAuthFormWidgetProps {
 
 
 // form data models
+
+// register
 export interface IFormWidgetRegisterData {
     email: string
     password: string
     full_name: string
 }
 
+// login 
 export interface IFormWidgetLoginData {
     username: string
     password: string
@@ -28,6 +32,7 @@ export interface IFormWidgetLoginData {
 
 // component
 export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
+    const navigate = useNavigate()
     const login = props.login
 
     // register form data
@@ -57,15 +62,17 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
         }
     }
 
+
     // submitting data
     const handleSubmit = () => {
-        // event.preventDefault()
-        console.log("submit form")
-
         if (login) {
             API.Auth.Login(loginFormData)
+            API.getMyAccount()
         } else {
             API.Auth.Register(registerFormData)
+            API.getMyAccount()
+            localStorage.setItem("confirmEmail", registerFormData.email)
+            navigate("/auth/emailConfirm")
         }
     }
 
@@ -74,12 +81,16 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
         <Flex
             w="100%"
             h="100vh"
+            flexDirection="column"
             alignItems="center"
             justifyContent="center"
+            bg="black"
         >
+            <img src={ oggettoLogo } alt="oggetto logo" />
+
             <Box
                 minW="20rem"
-                bg="#F9F9F9"
+                bg="#28282883"
                 p="1rem"
                 borderRadius="1rem"
             >
@@ -87,6 +98,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
                     <VStack gap="1rem" align="center">
                         // Header
                         <Text
+                            color="white"
                             fontSize="2rem"
                             fontWeight="bold"
                         >
@@ -95,6 +107,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
 
                         // Email only if register 
                         { !login && <Input
+                            color="white"
                             name="email"
                             type="email"
                             placeholder="Адрес эл. почты"
@@ -105,9 +118,10 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
 
                         // Username
                        <Input
+                            color="white"
                             name={ login ? "username" : "full_name" }
                             type="username"
-                            placeholder="Имя"
+                            placeholder={ login ? "Адрес эл. почты" : "Имя" }
                             value={ login ? loginFormData.username : registerFormData.full_name }
                             onChange={ handleChange }
                             required
@@ -115,6 +129,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
 
                         // Password
                         <Input
+                            color="white"
                             name="password"
                             type="password"
                             placeholder="Пароль"
@@ -125,12 +140,14 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
 
                         // Link to login/register page
                         <Link to={ login ? "../register" : "../login" }>
-                            { login ? "Нет аккаунта? Зарегистрироваться" : "Есть аккаунт? Войти" }
+                            <Text color="white">
+                                { login ? "Нет аккаунта? Зарегистрироваться" : "Есть аккаунт? Войти" }
+                            </Text>
                         </Link>
 
                         // Submit
                         <Button
-                            colorScheme="blue"
+                            colorScheme="yellow"
                             w="100%"
                             onClick={ () => handleSubmit() }
                         >

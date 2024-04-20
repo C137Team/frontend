@@ -1,5 +1,11 @@
+import { CoffeeWidget, HeaderWidget } from "../../../3_widgets"
+
+
 export const CoffeePage = () => {
     return (
-        <>coffee page</>
+        <>
+            <HeaderWidget title="Встреча" />
+            <CoffeeWidget />
+        </>
     )
 }

@@ -1,5 +1,10 @@
+import { HeaderWidget } from "../../../3_widgets"
+
+
 export const AccountPage = () => {
     return (
-        <>accountpage</>
+        <>
+            <HeaderWidget title="Профиль" />
+        </>
     )
 }

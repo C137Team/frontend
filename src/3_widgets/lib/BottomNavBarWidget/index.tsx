@@ -21,7 +21,7 @@ export const BottomNavBarWidget = () => {
                 justifyContent="center"
             >
                 <HStack
-                    bg="#cecece41"
+                    bg="#28282883"
                     p="1.25rem"
                     borderRadius="1rem"
                     alignItems="center"
@@ -29,15 +29,15 @@ export const BottomNavBarWidget = () => {
                     gap="3rem"
                 >
                     <Link to="home">
-                        <FaHouse size={ iconSize } />
+                        <FaHouse size={ iconSize } color="#ffcc00" />
                     </Link>
 
                     <Link to="coffee">
-                        <SiCoffeescript size={ iconSize } />
+                        <SiCoffeescript size={ iconSize } color="#ffcc00" />
                     </Link>
 
                     <Link to="account">
-                        <FaUser size={ iconSize } />
+                        <FaUser size={ iconSize } color="#ffcc00" />
                     </Link>
                 </HStack>
             </Box>

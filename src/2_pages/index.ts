@@ -5,6 +5,7 @@ import { NotFoundPage } from "./lib/NotFoundPage";
 import { HomePage } from "./lib/HomePage";
 import { CoffeePage } from "./lib/CoffeePage";
 import { AccountPage } from "./lib/AccountPage";
+import { EmailConfirmPage } from "./lib/EmailConfirmPage";
 
 
 export {
@@ -13,5 +14,6 @@ export {
     NotFoundPage,
     HomePage,
     CoffeePage,
-    AccountPage
+    AccountPage,
+    EmailConfirmPage
 }
