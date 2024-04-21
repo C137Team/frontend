@@ -1,14 +1,18 @@
 import axios from "axios"
 
-import { REGISTER_URL, LOGIN_URL, CONFIRM_EMAIL_URL } from "../config/APIConstants"
 import { IFormWidgetLoginData, IFormWidgetRegisterData } from "../../../3_widgets/lib/AuthFormWidget"
+import {
+    REGISTER_URL,
+    LOGIN_URL,
+    CONFIRM_EMAIL_URL
+} from "../config/APIConstants"
 
 
 export class Auth {
-    static accessToken = localStorage.getItem("accessToken")
+    // static accessToken = this.Login()
 
-    public static Register = (data: IFormWidgetRegisterData) => {
-        axios.post(REGISTER_URL, data)
+    public static Register = async (data: IFormWidgetRegisterData) => {
+        await axios.post(REGISTER_URL, data)
             .then(response => {
                 console.log(response)
             })
@@ -17,10 +21,10 @@ export class Auth {
             })
     }
 
-    public static Login = (data: IFormWidgetLoginData) => {
+    public static Login = async (data: IFormWidgetLoginData) => {
         const params = new URLSearchParams()
 
-        params.append("username", data.username)
+        params.append("username", data.email)
         params.append("password", data.password)
 
         axios.post(LOGIN_URL, params)
@@ -33,23 +37,26 @@ export class Auth {
             })
     }
 
-    public static ConfirmEmail = (confirmation_code: string) => {
-        axios.post(CONFIRM_EMAIL_URL, {
+    public static ConfirmEmail = async (confirmation_code: string) => {
+        const token = localStorage.getItem("accessToken")
+        console.log(`TOKEN: ${token}`)
+
+        const result = await axios.post(CONFIRM_EMAIL_URL, {
             confirmation_code
         },
         {
             headers: {
                 // "access_token": this.accessToken
-                "Authorization": "Bearer " + this.accessToken
+                "Authorization": "Bearer " + token
             }
         })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(e => {
-                console.log(e)
-            })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(e => {
+            console.log(e)
+        })
 
-        console.log(this.accessToken)
+        return result
     }
 }

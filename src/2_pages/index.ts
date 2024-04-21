@@ -6,6 +6,7 @@ import { HomePage } from "./lib/HomePage";
 import { CoffeePage } from "./lib/CoffeePage";
 import { AccountPage } from "./lib/AccountPage";
 import { EmailConfirmPage } from "./lib/EmailConfirmPage";
+import { OggettoLogoWidget } from "../3_widgets/lib/OggettoLogoWidget";
 
 
 export {
@@ -15,5 +16,6 @@ export {
     HomePage,
     CoffeePage,
     AccountPage,
-    EmailConfirmPage
+    EmailConfirmPage,
+    OggettoLogoWidget
 }

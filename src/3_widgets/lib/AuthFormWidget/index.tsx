@@ -5,7 +5,7 @@ import API from "../../../4_shared"
 import oggettoLogo from "../../../4_shared/lib/assets/img/oggetto/oggetto-logo_tonal-inverse-hor-rus.png"
 
 
-type ChangeEvent = React.ChangeEvent<HTMLInputElement>
+export type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 
 
 // widget props model
@@ -25,7 +25,7 @@ export interface IFormWidgetRegisterData {
 
 // login 
 export interface IFormWidgetLoginData {
-    username: string
+    email: string
     password: string
 }
 
@@ -44,7 +44,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
 
     // login form data
     const [ loginFormData, setLoginFormData ] = useState<IFormWidgetLoginData>({
-        username: "",
+        email: "",
         password: "",
     })
 
@@ -67,11 +67,13 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
     const handleSubmit = () => {
         if (login) {
             API.Auth.Login(loginFormData)
-            API.getMyAccount()
+            // API.getMyAccount()
         } else {
-            API.Auth.Register(registerFormData)
-            API.getMyAccount()
-            localStorage.setItem("confirmEmail", registerFormData.email)
+            API.Auth.Register(registerFormData).then(() => API.Auth.Login(registerFormData))
+            // API.getMyAccount()
+            localStorage.setItem("usernameForConfirm", registerFormData.email)
+            localStorage.setItem("passwordForConfirm", registerFormData.password)
+            // API.Auth.Login(registerFormData)
             navigate("/auth/emailConfirm")
         }
     }
@@ -86,7 +88,14 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
             justifyContent="center"
             bg="black"
         >
-            <img src={ oggettoLogo } alt="oggetto logo" />
+            <img
+                src={ oggettoLogo }
+                alt="oggetto logo"
+                style={{
+                    minWidth: "",
+                    maxWidth: "25rem"
+                }}
+            />
 
             <Box
                 minW="20rem"
@@ -122,7 +131,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
                             name={ login ? "username" : "full_name" }
                             type="username"
                             placeholder={ login ? "Адрес эл. почты" : "Имя" }
-                            value={ login ? loginFormData.username : registerFormData.full_name }
+                            value={ login ? loginFormData.email : registerFormData.full_name }
                             onChange={ handleChange }
                             required
                         />

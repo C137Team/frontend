@@ -2,6 +2,7 @@ import { Box, Button, FormControl, Input, VStack } from "@chakra-ui/react"
 import { useState } from "react"
 import API from "../../../4_shared"
 
+
 export const EmailConfirmationWidget = () => {
     const [ code, setCode ] = useState<string>("")
 
@@ -10,7 +11,7 @@ export const EmailConfirmationWidget = () => {
     const handleSubmit = () => {
         console.log(code)
 
-        API.Auth.ConfirmEmail(code)
+        API.Auth.ConfirmEmail(code).then(result => console.log(`RESULT: ${result}`))
     }
 
     return (

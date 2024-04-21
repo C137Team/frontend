@@ -4,11 +4,12 @@ import { bgColor, fgColor } from "../../../4_shared/lib/config/colors"
 
 
 interface ITextWidgetProps {
-    text: string
+    text?: string
+    children?: JSX.Element | Array<JSX.Element> | string
 }
 
 
-export const TextWidget: FC<ITextWidgetProps> = (props) => {
+export const TextWidget: FC<ITextWidgetProps> = ({children}) => {
     return (
         <Box
             bg={ bgColor }
@@ -20,7 +21,8 @@ export const TextWidget: FC<ITextWidgetProps> = (props) => {
                 color={ fgColor }
                 align="center"
             >
-                { props.text }
+                {/* { props.text } */}
+                { children }
             </Text>
         </Box>
     )
