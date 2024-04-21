@@ -4,7 +4,8 @@ import { IFormWidgetLoginData, IFormWidgetRegisterData } from "../../../3_widget
 import {
     REGISTER_URL,
     LOGIN_URL,
-    CONFIRM_EMAIL_URL
+    CONFIRM_EMAIL_URL,
+    GETME_URL
 } from "../config/APIConstants"
 
 
@@ -21,13 +22,31 @@ export class Auth {
             })
     }
 
+    public static GetMePerson = async () => {
+        const token = localStorage.getItem("accessToken")
+
+        await axios.get(GETME_URL,
+        {
+            headers: {
+                // "access_token": this.accessToken
+                "Authorization": "Bearer " + token
+            }
+        })
+        .then(response => {
+            localStorage.setItem("displayName", response.data.display_text)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+    }
+
     public static Login = async (data: IFormWidgetLoginData) => {
         const params = new URLSearchParams()
 
         params.append("username", data.email)
         params.append("password", data.password)
 
-        axios.post(LOGIN_URL, params)
+        await axios.post(LOGIN_URL, params)
             .then(response => {
                 console.log(response)
                 localStorage.setItem("accessToken", response.data.access_token)

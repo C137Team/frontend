@@ -67,8 +67,9 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
     const handleSubmit = () => {
         if (login) {
             API.Auth.Login(loginFormData)
-            // API.getMyAccount()
-            navigate("/app/home")
+                .then(() => {
+                    API.Auth.GetMePerson().then(() => navigate("/app/home"))
+                })
         } else {
             API.Auth.Register(registerFormData).then(() => API.Auth.Login(registerFormData))
             // API.getMyAccount()
