@@ -22,9 +22,7 @@ export const AvatarWidget = () => {
                 fontWeight="bold"
                 align="center"
             >
-                Имя
-                <br />
-                Фамилия
+                { localStorage.getItem("displayName") }
             </Text>
         </Flex>
     )

@@ -31,6 +31,7 @@ export class Auth {
             .then(response => {
                 console.log(response)
                 localStorage.setItem("accessToken", response.data.access_token)
+                localStorage.setItem("isAuthed", "a")
             })
             .catch(e => {
                 console.log(e)
@@ -52,6 +53,8 @@ export class Auth {
         })
         .then(response => {
             console.log(response)
+            localStorage.setItem("displayName", response.data.person.display_text)
+            localStorage.setItem("isAuthed", "a")
         })
         .catch(e => {
             console.log(e)

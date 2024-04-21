@@ -1,9 +1,11 @@
 import { Box, Button, FormControl, Input, VStack } from "@chakra-ui/react"
 import { useState } from "react"
 import API from "../../../4_shared"
+import { useNavigate } from "react-router-dom"
 
 
 export const EmailConfirmationWidget = () => {
+    const navigate = useNavigate()
     const [ code, setCode ] = useState<string>("")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setCode(e.target.value)
@@ -11,7 +13,9 @@ export const EmailConfirmationWidget = () => {
     const handleSubmit = () => {
         console.log(code)
 
-        API.Auth.ConfirmEmail(code).then(result => console.log(`RESULT: ${result}`))
+        API.Auth.ConfirmEmail(code).then(result => console.log(`RESULT: ${result}`)).then(() => {
+            navigate("../../app/home")
+        })
     }
 
     return (

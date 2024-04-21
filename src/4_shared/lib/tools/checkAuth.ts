@@ -1,5 +1,9 @@
-import { API } from "../api"
+export const checkAuth = (): boolean => {
+    if (localStorage.getItem("isAuthed")) {
+        return true
+    } else {
+        location.pathname = "/auth/login"
+    }
 
-export const checkAuth = () => {
-    return API.Auth.Login
+    return false
 }

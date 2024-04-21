@@ -68,6 +68,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
         if (login) {
             API.Auth.Login(loginFormData)
             // API.getMyAccount()
+            navigate("/app/home")
         } else {
             API.Auth.Register(registerFormData).then(() => API.Auth.Login(registerFormData))
             // API.getMyAccount()
@@ -128,7 +129,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
                         // Username
                        <Input
                             color="white"
-                            name={ login ? "username" : "full_name" }
+                            name={ login ? "email" : "full_name" }
                             type="username"
                             placeholder={ login ? "Адрес эл. почты" : "Имя" }
                             value={ login ? loginFormData.email : registerFormData.full_name }
