@@ -25,15 +25,23 @@ import MarkerPosStore from '../../../4_shared/lib/store/MarkerPosStore';
 //     userPositionLng = navigator.geolocation.getCurrentPosition(position => position.coords.longitude)
 // }
 
-const center = {
-  lat: 47.22233707166336,
-  lng: 39.71858024597169,
-//   lat: userPositionLat ? userPositionLat : 0,
-//   lng: userPositionLng ? userPositionLng : 0,
+
+interface IDraggableMarkerProps {
+  latitude: number
+  longitude: number
 }
 
-const DraggableMarker = observer(() => {
+const DraggableMarker: FC<IDraggableMarkerProps> = observer((props) => {
     const { setMarkerPos } = MarkerPosStore
+
+    const center = {
+      // lat: 47.22233707166336,
+      // lng: 39.71858024597169,
+      lat: props.latitude,
+      lng: props.longitude
+    //   lat: userPositionLat ? userPositionLat : 0,
+    //   lng: userPositionLng ? userPositionLng : 0,
+    }
 
     const [ draggable ] = useState(true)
     const [ position, setPosition ] = useState(center)
@@ -87,10 +95,14 @@ interface IMapProps {
   height: string
   borderRadius: string
   nonDragable?: boolean
+
+  latitude: number
+  longitude: number
+
   children?: ReactNode
 }
 
-export const MapWidget: FC<IMapProps> = observer(({ width, height, borderRadius, nonDragable, children}) => {
+export const MapWidget: FC<IMapProps> = observer(({ width, height, borderRadius, nonDragable, latitude, longitude, children}) => {
     // const { markerPos } = MarkerPosStore
 
     return (
@@ -98,7 +110,7 @@ export const MapWidget: FC<IMapProps> = observer(({ width, height, borderRadius,
           display: "flex",
           flexDirection: "column",
         }}>
-            <MapContainer center={[47.22233707166336, 39.71858024597169]} zoom={ 15 } scrollWheelZoom={true}
+            <MapContainer center={[latitude, longitude]} zoom={ 15 } scrollWheelZoom={true}
                 style={{
                 width,
                 height,
@@ -113,7 +125,7 @@ export const MapWidget: FC<IMapProps> = observer(({ width, height, borderRadius,
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                { nonDragable ? <></> : <DraggableMarker /> }
+                { nonDragable ? <></> : <DraggableMarker latitude={ latitude } longitude={ longitude } /> }
                 { children }
             </MapContainer>
             {/* { markerPos } */}

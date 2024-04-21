@@ -2086,6 +2086,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.29.0":
+  version: 5.29.0
+  resolution: "@tanstack/query-core@npm:5.29.0"
+  checksum: 79d1033411842f289489afb721add7593cd0181411aab72c39a70615e437c577d53c290d0afa699fe9c6637597051195e03a7ef0eebaf03a9a83c943a46782d9
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.29.2":
+  version: 5.29.2
+  resolution: "@tanstack/react-query@npm:5.29.2"
+  dependencies:
+    "@tanstack/query-core": 5.29.0
+  peerDependencies:
+    react: ^18.0.0
+  checksum: f2ffb2298cd19617e2002a721f426f75c2cf954b9ec73750c59e71481e8a18f11936e48dbd2caeb702beaf328a2b8375f2de228d489f307d86239d17f4f5f324
+  languageName: node
+  linkType: hard
+
 "@tsconfig/node10@npm:^1.0.7":
   version: 1.0.11
   resolution: "@tsconfig/node10@npm:1.0.11"
@@ -3386,6 +3404,7 @@ __metadata:
     "@craco/craco": ^7.1.0
     "@emotion/react": ^11.11.4
     "@emotion/styled": ^11.11.5
+    "@tanstack/react-query": ^5.29.2
     "@types/react": ^18.2.66
     "@types/react-dom": ^18.2.22
     "@typescript-eslint/eslint-plugin": ^7.2.0

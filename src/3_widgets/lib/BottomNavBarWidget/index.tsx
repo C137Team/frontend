@@ -19,7 +19,7 @@ export const BottomNavBarWidget = () => {
                 bottom="3"
                 display="flex"
                 justifyContent="center"
-                zIndex={999}
+                zIndex={9999}
             >
                 <HStack
                     bg="#282828"

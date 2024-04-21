@@ -1,6 +1,10 @@
 import axios from "axios";
 import { Auth } from "./auth";
-import { MYACCOUNT_URL } from "../config/APIConstants";
+import {
+	GET_MY_MEETING_URL,
+	MYACCOUNT_URL,
+	START_WANDER_URL
+} from "../config/APIConstants";
 
 
 export class API {
@@ -22,5 +26,34 @@ export class API {
 			.catch(e => {
 				console.log(e)
 			})
+	}
+
+	public static StartWander = async () => {
+		const token = localStorage.getItem("accessToken")
+
+		await axios.post(START_WANDER_URL,
+		{},
+		{
+			headers: {
+                "Authorization": "Bearer " + token
+            }
+		})
+		.then(response => response)
+		.catch(e => console.log(e))
+	}
+
+	public static GetMyMeeting = async () => {
+		const token = localStorage.getItem("accessToken")
+
+		return await axios.get(GET_MY_MEETING_URL,
+		{
+			headers: {
+                "Authorization": "Bearer " + token
+            }
+		})
+		.then(response => {
+			response
+		})
+		.catch(e => console.log(e))
 	}
 }

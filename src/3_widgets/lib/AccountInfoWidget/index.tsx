@@ -1,5 +1,4 @@
-import { Text, Flex, Button } from "@chakra-ui/react"
-import { TextWidget } from "../TextWidget"
+import { Flex, Button } from "@chakra-ui/react"
 import { AvatarWidget } from "../AvatarWidget"
 import { IoExitOutline } from "react-icons/io5";
 
@@ -11,16 +10,17 @@ export const AccountInfoWidget = () => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
+            gap="1rem"
         >
             <AvatarWidget />
 
-            <TextWidget>
+            {/* <TextWidget>
                 <Text
                     fontSize="2rem"
                 >
                     asdasd
                 </Text>
-            </TextWidget>
+            </TextWidget> */}
 
             <Button colorScheme="yellow" onClick={() => {
                 localStorage.removeItem("isAuthed")

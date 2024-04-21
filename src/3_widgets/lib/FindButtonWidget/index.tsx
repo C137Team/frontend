@@ -1,9 +1,15 @@
 import { Button, Flex, } from "@chakra-ui/react"
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import API from "../../../4_shared";
 
 export const FindButtonWidget = () => {
     const navigate = useNavigate()
+
+    const handleStartWander = () => {
+        API.StartWander()
+            .then(() => navigate("../coffee"))
+    }
 
     return (
         <Flex
@@ -16,7 +22,7 @@ export const FindButtonWidget = () => {
                 leftIcon={ <FaSearch /> }
                 size="lg"
 
-                onClick={ () => navigate("/app/searchForСompanion") }
+                onClick={ () => handleStartWander() }
             >
                 Найти собеседника
             </Button>

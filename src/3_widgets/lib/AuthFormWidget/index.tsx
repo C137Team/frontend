@@ -95,7 +95,7 @@ export const AuthFormWidget: FC<IAuthFormWidgetProps> = (props) => {
                 alt="oggetto logo"
                 style={{
                     minWidth: "",
-                    maxWidth: "25rem"
+                    maxWidth: "20rem"
                 }}
             />
 
